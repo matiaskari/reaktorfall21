@@ -8,6 +8,7 @@ import textFile from './MagicCompRules20210419.txt'
 
 const App = () => {
     const [rules, setRules] = useState([])
+
     //const [showAll, setShowAll] = useState(true)
 
     useEffect(() => {
