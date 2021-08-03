@@ -5,10 +5,11 @@
 import React, { useState, useEffect } from 'react'
 import rulesService from './services/rules'
 import textFile from './MagicCompRules20210419.txt'
+import TableOfContents from './components/TableOfContents'
+import FullRules from './components/FullRules'
 
 const App = () => {
     const [rules, setRules] = useState([])
-
     //const [showAll, setShowAll] = useState(true)
 
     useEffect(() => {
@@ -25,15 +26,27 @@ const App = () => {
             .then(text => {
                 const formattedText = text.split('\r\n').filter(line => line !== "")
                 setRules(formattedText)
-                console.log(formattedText)
+                //console.log(formattedText)
             })
     }, [])
 
-    console.log('render', rules.length, 'rules')
+    console.log('render', rules.length, 'lines of rules')
+    const styles = {
+        container: {
+            flex: 1,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            alignItems: 'flex-start' // if you want to fill rows left to right
+        },
+        item: {
+            width: '50%' // is 50% of container width
+        }
+    }
 
     return (
-        <div>
-            {rules}
+        <div style={styles.container}>
+            <div style={styles.item}><TableOfContents textArray={rules} /></div>
+            <div style={styles.item}><FullRules textArray={rules} /></div>
         </div>
     )
 }
