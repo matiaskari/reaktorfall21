@@ -13,6 +13,8 @@ import FullRules from './components/FullRules'
 const App = () => {
     const [rules, setRules] = useState([])
     const [filter, setFilter] = useState([])
+    //const [tocChapter, setTocChapter] = useState([])
+    let tocChapter = ''
 
     useEffect(() => {
         /*rulesService.getRules()
@@ -33,14 +35,20 @@ const App = () => {
         console.log('Filter: ', event.target.value)
         setFilter(event.target.value)
     }
+    const setTocSearch = (chapter) => {
+        console.log('chapter: ', chapter)
+        tocChapter = chapter
+        //setTocChapter(chapter)
+    }
 
     const styles = {
         container: {
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            alignItems: 'flex-start', // if you want to fill rows left to right
-            width: '100%'
+            alignItems: 'flex-start',
+            width: '100%',
+            fontFamily: 'Arial, Helvetica, sans-serif'
         },
         styleToC: {
             flex: '1',
@@ -61,17 +69,20 @@ const App = () => {
             borderStyle: 'solid',
             borderRadius: '10px',
             borderWidth: '2px'
+        },
+        filterField: {
+            paddingBottom: '10px'
         }
     }
 
     return (
         <div style={styles.container}>
-            <div style={styles.styleToC}><TableOfContents textArray={rules} /></div>
+            <div style={styles.styleToC}><TableOfContents textArray={rules} tocSearch={setTocSearch} /></div>
             <div style={styles.styleRules}>
-                <form>Search for rules: <input value={filter} onChange={changeFilter} /></form>
-                <FullRules textArray={rules} filter={filter} />
+                <form style={styles.filterField}>Search for rules: <input value={filter} onChange={changeFilter} /></form>
+                <FullRules textArray={rules} filter={filter} tocChapter={tocChapter} />
             </div>
-        </div>
+        </div >
     )
 }
 

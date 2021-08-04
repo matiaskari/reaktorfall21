@@ -1,6 +1,13 @@
-const TableOfContents = ({ textArray }) => {
-    const fullToC = textArray.slice(textArray.indexOf("Contents"), textArray.indexOf("Credits") + 1)
-    //const chapters = fullToC.filter(line => !isNaN(line[0]) && (line[3] === '.' || line[1] === '.') && isNaN(line[4]))
+const TableOfContents = ({ textArray, tocSearch }) => {
+    const fullToC = textArray.slice(textArray.indexOf("Contents") + 1, textArray.indexOf("Glossary"))
+
+    //const chapterNumbers = fullToC.map(line => line.split(' ')[0])
+    const setTocSearch = (line) => {
+        console.log(line)
+        //event.preventDefault()
+        tocSearch(line.split(' ')[0])
+    }
+    //console.log(chapterNumbers)
     const chapterStyle = {
         margin: '0',
         paddingTop: '15px',
@@ -12,13 +19,14 @@ const TableOfContents = ({ textArray }) => {
     }
     const formatted = fullToC.map(line => {
         if ((!isNaN(line[0]) && line[1] === '.') || isNaN(line[0])) {
-            return <h3 key={'chapter' + line.split(' ')[0]} style={chapterStyle}>{line}</h3>
+            return <h3 key={'chapter' + line.split(' ')[0]} style={chapterStyle}><button onClick={setTocSearch(line)}>{line}</button></h3>
         } else {
-            return <p key={'chapter' + line.split(' ')[0]} style={subChapterStyle}>{line}</p>
+            return <p key={'chapter' + line.split(' ')[0]} style={subChapterStyle}><button onClick={setTocSearch(line)}>{line}</button></p>
         }
     })
     return (
         <div>
+            <button>Show all rules</button>
             {formatted}
         </div>
     )
