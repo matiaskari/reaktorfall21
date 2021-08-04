@@ -9,6 +9,7 @@ import FullRules from './components/FullRules'
     Switch, Route, Link
 } from "react-router-dom"*/
 
+
 const App = () => {
     const [rules, setRules] = useState([])
     const [filter, setFilter] = useState([])
