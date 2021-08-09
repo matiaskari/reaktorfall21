@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-//import rulesService from './services/rules'
+import rulesService from './services/rules'
 import textFile from './MagicCompRules20210419.txt'
 import TableOfContents from './components/TableOfContents'
 import FullRules from './components/FullRules'
@@ -17,19 +17,18 @@ const App = () => {
     let tocChapter = ''
 
     useEffect(() => {
-        /*rulesService.getRules()
-            .then(response => response.text())
+        rulesService.getRules()
             .then(response => {
                 console.log('promise fulfilled')
-                console.log(response)
-                setRules(response.data)
-            })*/
-        fetch(textFile)
+                const formattedText = response.split('\r\n').filter(line => line !== "")
+                setRules(formattedText)
+            })
+        /*fetch(textFile)
             .then((r) => r.text())
             .then(text => {
                 const formattedText = text.split('\r\n').filter(line => line !== "")
                 setRules(formattedText)
-            })
+            })*/
     }, [])
     const changeFilter = (event) => {
         console.log('Filter: ', event.target.value)
