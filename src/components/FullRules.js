@@ -3,6 +3,8 @@ const FullRules = ({ textArray, filter, tocChapter }) => {
     const rulesWithoutToC = textArray.slice(textArray.indexOf("Credits") + 1, textArray.length)
     const onlyRules = rulesWithoutToC.slice(0, rulesWithoutToC.indexOf("Glossary")) //same as rulesWithoutToC but also Glossary removed
     let wantedRules = ''
+    let noRulesText = ''
+
     if (tocChapter.length === 0) {
         wantedRules = onlyRules
     } else if (tocChapter.split(' ')[0].length === 2) {
@@ -12,6 +14,12 @@ const FullRules = ({ textArray, filter, tocChapter }) => {
     }
 
     const rulesToShow = filter === '' ? wantedRules : wantedRules.filter(line => line.toLowerCase().includes(filter.toString().toLowerCase()))
+
+    if (textArray.length === 0) {
+        noRulesText = 'Loading rules...'
+    } else if (textArray.length !== 0 && rulesToShow.length === 0) {
+        noRulesText = 'Could not find results for "' + filter.toString() + '"'
+    }
 
     const generateKey = () => {
         const min = 0
@@ -30,7 +38,7 @@ const FullRules = ({ textArray, filter, tocChapter }) => {
 
     return (
         <div>
-            {formatted.length === 0 ? 'Could not find results for "' + filter.toString() + '"' : formatted}
+            {formatted.length === 0 ? noRulesText : formatted}
         </div>
     )
 }

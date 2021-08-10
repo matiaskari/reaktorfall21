@@ -27,13 +27,19 @@ const App = () => {
     }
 
     const styles = {
+        body: {
+            fontFamily: 'Arial, Helvetica, sans-serif'
+        },
+        title: {
+            marginLeft: '15px',
+            marginTop: '25px'
+        },
         container: { //Creating the 2-column layout
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
             alignItems: 'flex-start',
             width: '100%',
-            fontFamily: 'Arial, Helvetica, sans-serif'
         },
         styleToC: {
             flex: '1', //Table of Contents width
@@ -61,13 +67,16 @@ const App = () => {
     }
 
     return (
-        <div style={styles.container}>
-            <div style={styles.styleToC}><TableOfContents textArray={rules} tocSearch={setTocSearch} /></div>
-            <div style={styles.styleRules}>
-                <form style={styles.filterField}>Search for rules: <input value={filter} onChange={changeFilter} /></form>
-                <FullRules textArray={rules} filter={filter} tocChapter={tocChapter} />
+        <div style={styles.body}>
+            <h2 style={styles.title}>Matias Kari | Assignment for Reaktor junior developers, fall 2021</h2>
+            <div style={styles.container}>
+                <div style={styles.styleToC}><TableOfContents textArray={rules} tocSearch={setTocSearch} /></div>
+                <div style={styles.styleRules}>
+                    <form style={styles.filterField}>Search for rules: <input value={filter} onChange={changeFilter} /></form>
+                    <FullRules textArray={rules} filter={filter} tocChapter={tocChapter} />
+                </div>
             </div>
-        </div >
+        </div>
     )
 }
 
