@@ -3,7 +3,6 @@ const TableOfContents = ({ textArray, tocSearch }) => {
     const setTocSearch = (line) => {
         tocSearch(line)
     }
-    console.log(fullToC)
     const chapterStyle = {
         margin: '0',
         marginTop: '10px',
