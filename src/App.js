@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
 import rulesService from './services/rules'
-import textFile from './MagicCompRules20210419.txt'
 import TableOfContents from './components/TableOfContents'
 import FullRules from './components/FullRules'
 /*import {
@@ -13,8 +12,7 @@ import FullRules from './components/FullRules'
 const App = () => {
     const [rules, setRules] = useState([])
     const [filter, setFilter] = useState([])
-    //const [tocChapter, setTocChapter] = useState([])
-    let tocChapter = ''
+    const [tocChapter, setTocChapter] = useState([])
 
     useEffect(() => {
         rulesService.getRules()
@@ -23,21 +21,14 @@ const App = () => {
                 const formattedText = response.split('\r\n').filter(line => line !== "")
                 setRules(formattedText)
             })
-        /*fetch(textFile)
-            .then((r) => r.text())
-            .then(text => {
-                const formattedText = text.split('\r\n').filter(line => line !== "")
-                setRules(formattedText)
-            })*/
     }, [])
     const changeFilter = (event) => {
         console.log('Filter: ', event.target.value)
         setFilter(event.target.value)
     }
     const setTocSearch = (chapter) => {
-        console.log('chapter: ', chapter)
-        tocChapter = chapter
-        //setTocChapter(chapter)
+        console.log('Viewing chapter:', chapter.length ? chapter : 'All')
+        setTocChapter(chapter)
     }
 
     const styles = {

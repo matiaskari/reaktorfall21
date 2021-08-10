@@ -1,13 +1,17 @@
 
 const FullRules = ({ textArray, filter, tocChapter }) => {
-
     const rulesWithoutToC = textArray.slice(textArray.indexOf("Credits") + 1, textArray.length)
     const onlyRules = rulesWithoutToC.slice(0, rulesWithoutToC.indexOf("Glossary")) //same as rulesWithoutToC but also Glossary removed
-    /*const glossary = rulesWithoutToC.slice(rulesWithoutToC.indexOf("Glossary"), rulesWithoutToC.length)
-        .map(line => <p key={'rule' + rulesWithoutToC.indexOf(line)}>{line}</p>)*/
-    const wantedRules = tocChapter === '' ? onlyRules : onlyRules.filter(line => line.slice(0, 4).includes(tocChapter))
-    const rulesToShow = filter === '' ? wantedRules : wantedRules.filter(line => line.toLowerCase().includes(filter))
-    console.log(tocChapter)
+    let wantedRules = ''
+    if (tocChapter.length === 0) {
+        wantedRules = onlyRules
+    } else if (tocChapter.split(' ')[0].length === 2) {
+        wantedRules = onlyRules.filter(line => line[0] === tocChapter[0])
+    } else {
+        wantedRules = onlyRules.filter(line => line.slice(0, 4).includes(tocChapter.split(' ')[0]))
+    }
+
+    const rulesToShow = filter === '' ? wantedRules : wantedRules.filter(line => line.toLowerCase().includes(filter.toString().toLowerCase()))
 
     const generateKey = () => {
         const min = 0
@@ -26,7 +30,7 @@ const FullRules = ({ textArray, filter, tocChapter }) => {
 
     return (
         <div>
-            {formatted}
+            {formatted.length === 0 ? 'Could not find results for "' + filter.toString() + '"' : formatted}
         </div>
     )
 }
