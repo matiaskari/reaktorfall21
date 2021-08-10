@@ -9,6 +9,7 @@ const FullRules = ({ textArray, filter, tocChapter }) => {
         wantedRules = onlyRules
     } else if (tocChapter.split(' ')[0].length === 2) {
         wantedRules = onlyRules.filter(line => line[0] === tocChapter[0])
+        //wantedRules = onlyRules.slice(onlyRules.indexOf(tocChapter), onlyRules.indexOf(/*the next chapter*/))
     } else {
         wantedRules = onlyRules.filter(line => line.slice(0, 4).includes(tocChapter.split(' ')[0]))
     }
