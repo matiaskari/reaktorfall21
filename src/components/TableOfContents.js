@@ -3,12 +3,13 @@ const TableOfContents = ({ textArray, tocSearch }) => {
     const setTocSearch = (line) => {
         tocSearch(line)
     }
-
+    console.log(fullToC)
     const chapterStyle = {
         margin: '0',
+        marginTop: '10px',
         padding: '5px',
         fontWeight: '600',
-        backgroundColor: 'lightblue',
+        backgroundColor: '#a4d2e0',
         cursor: 'pointer',
         border: 'none',
         borderRadius: '3px'
@@ -18,16 +19,14 @@ const TableOfContents = ({ textArray, tocSearch }) => {
         marginLeft: '15px',
         padding: '3px',
         fontWeight: '400',
-        backgroundColor: 'lightblue',
+        backgroundColor: '#badde8',
         cursor: 'pointer',
         border: 'none',
         borderRadius: '3px'
     }
     const listStyle = {
-        marginTop: '3px',
-        marginLeft: '0',
-        marginRight: '0',
-        marginBottom: '0',
+        margin: '0',
+        marginBottom: '3px',
         padding: '0'
     }
 

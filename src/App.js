@@ -3,11 +3,6 @@ import React, { useState, useEffect } from 'react'
 import rulesService from './services/rules'
 import TableOfContents from './components/TableOfContents'
 import FullRules from './components/FullRules'
-/*import {
-    BrowserRouter as Router,
-    Switch, Route, Link
-} from "react-router-dom"*/
-
 
 const App = () => {
     const [rules, setRules] = useState([])
@@ -23,16 +18,16 @@ const App = () => {
             })
     }, [])
     const changeFilter = (event) => {
-        console.log('Filter: ', event.target.value)
+        console.log('Current filter:', event.target.value)
         setFilter(event.target.value)
     }
     const setTocSearch = (chapter) => {
-        console.log('Viewing chapter:', chapter.length ? chapter : 'All')
+        console.log('Viewing chapter:', chapter.length !== 0 ? chapter : 'All')
         setTocChapter(chapter)
     }
 
     const styles = {
-        container: {
+        container: { //Creating the 2-column layout
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
@@ -41,7 +36,7 @@ const App = () => {
             fontFamily: 'Arial, Helvetica, sans-serif'
         },
         styleToC: {
-            flex: '1',
+            flex: '1', //Table of Contents width
             width: '20%',
             padding: '20px',
             margin: '5px',
@@ -51,7 +46,7 @@ const App = () => {
             borderWidth: '2px'
         },
         styleRules: {
-            flex: '3',
+            flex: '3', //Rules width
             width: '70%',
             padding: '20px',
             margin: '5px',
